@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('filmText:', this.state.filmText)
     return (
       <div className="App">
         <header>

@@ -2,7 +2,6 @@ import React from 'react';
 import '../../main.scss';
 
 const ScrollingText = ({episode, title, text}) => {
-  console.log('text', text)
   return (
     <div className='ScrollingText'>
       <div className="fade"></div>
