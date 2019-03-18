@@ -8,15 +8,20 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      filmTextReady: false,
-      filmText: {}
+      filmText: {},
+      people: {}
     }
   }
 
   componentDidMount = async () => {
-    const rawFilmText = await API.textFetch()
+    const rawFilmText = await API.fetchText()
     const filmText = await cleaner.cleanFilmText(rawFilmText)
-    await this.setState({ filmText, filmTextReady: true })
+    this.setState({ filmText })
+  }
+
+  displayPeople = async () => {
+    const people = await API.fetchPeople()
+    this.setState({ people })
   }
 
   render() {
@@ -25,8 +30,14 @@ class App extends Component {
         <header>
           <h1>Wookie Wiki</h1>
         </header>
+        <nav>
+          <button onClick={() => this.displayPeople()}>People</button>
+          <button>Vehicles</button>
+          <button>Planets</button>
+        </nav>
         <main className='scroll-container'>
-          { this.state.filmTextReady && <ScrollingText {...this.state.filmText} /> }
+          { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
+          {/* { this.state.people !== {} && } */}
         </main>
       </div>
     );

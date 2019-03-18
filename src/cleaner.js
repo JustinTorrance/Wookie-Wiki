@@ -5,3 +5,18 @@ export const cleanFilmText = (film) => {
         text: film.opening_crawl
     }
 }
+
+// export const cleanPeople = (people) => {
+//     return people.filter(person => {
+//         return {
+//             person.name,
+//             person.homeworld, //fetch, grab name and population
+//             person.species, //fetch, reference staff bios
+//             //homeworld species
+//         }
+//     })
+// }
+
+// const fetchHomeworld = () => {
+
+// }
