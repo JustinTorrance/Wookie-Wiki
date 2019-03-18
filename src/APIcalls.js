@@ -17,19 +17,37 @@ export const fetchPeople = async () => {
     try {
         const response = await fetch('https://swapi.co/api/people')
         const peopleData = await response.json()
-        const people = await fetchHomeworlds(peopleData.results)
-        return people
+        const people = await fetchNestedPeopleData(peopleData.results)
+        return Promise.all(people)
     } catch (error) {
         console.log(error)
     }
 }
 
-const fetchHomeworlds = (people) => {
+const fetchNestedPeopleData = (people) => {
     const peopleData = people.map( async person => {
-        const response = await fetch(person.homeworld)
-        const homeworld = await response.json()
-        const homeworldData = {homeworld: homeworld.name, population: homeworld.population, person: person.name}
-        return homeworldData
+        const speciesData = await (fetchSpecies(person))
+        const homeworldData = await(fetchHomeworld(person))
+        return {
+            name: person.name,
+            species: speciesData.species,
+            homeworld: homeworldData.homeworld,
+            population: homeworldData.population
+        }
     })
     return Promise.all(peopleData)
 }
+
+const fetchHomeworld = async (person) => {
+    const response = await fetch(person.homeworld)
+    const homeworldData = await response.json()
+    return {    homeworld: homeworldData.name, 
+                population: homeworldData.population }
+}
+
+const fetchSpecies = async (person) => {
+    const response = await fetch(person.species)
+    const species = await response.json()
+    console.log('species', species.name)
+    return { species: species.name }
+    }

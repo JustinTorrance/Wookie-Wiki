@@ -37,7 +37,7 @@ class App extends Component {
         </nav>
         <main className='scroll-container'>
           { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
-          { this.state.people !== {} && }
+          {/* { this.state.people !== {} && } */}
         </main>
       </div>
     );
