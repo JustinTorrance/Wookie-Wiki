@@ -9,7 +9,9 @@ class App extends Component {
     super()
     this.state = {
       filmText: {},
-      people: {}
+      people: {},
+      planets: {},
+      vehicles: {}
     }
   }
 
@@ -24,6 +26,16 @@ class App extends Component {
     this.setState({ people })
   }
 
+  displayPlanets = async () => {
+    const planets = await API.fetchPlanets()
+    this.setState({ planets })
+  }
+
+  displayVehicles = async () => {
+    const vehicles = await API.fetchVehicles()
+    this.setState({ vehicles })
+  }
+
   render() {
     return (
       <div className="App">
@@ -32,8 +44,8 @@ class App extends Component {
         </header>
         <nav>
           <button onClick={() => this.displayPeople()}>People</button>
-          <button>Vehicles</button>
-          <button>Planets</button>
+          <button onClick={() => this.displayPlanets()}>Planets</button>
+          <button onClick={() => this.displayVehicles()}>Vehicles</button>
         </nav>
         <main className='scroll-container'>
           { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
