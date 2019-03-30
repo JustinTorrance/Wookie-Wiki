@@ -9,9 +9,10 @@ export const fetchText = async () => {
         const film = await response.json()
         return film;
     } catch (error) {
-        console.log(error)
+        console.log(error)    
     } 
 }
+
 
 export const fetchPeople = async () => {
     try {
