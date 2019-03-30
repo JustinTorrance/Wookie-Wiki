@@ -25,7 +25,7 @@ export const fetchPeople = async () => {
     }
 }
 
-const fetchNestedPeopleData = (people) => {
+export const fetchNestedPeopleData = (people) => {
     const peopleData = people.map( async person => {
         const speciesData = await (fetchSpecies(person))
         const homeworldData = await(fetchHomeworld(person))
