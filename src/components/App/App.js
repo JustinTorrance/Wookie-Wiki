@@ -5,6 +5,7 @@ import * as API from '../../APIcalls'
 import * as cleaner from '../../cleaner'
 import { storePeople } from '../../actions'
 import { connect } from 'react-redux'
+import { fetchPeople } from '../../thunks/fetchPeople'
 
 class App extends Component {
   constructor() {
@@ -23,26 +24,23 @@ class App extends Component {
     this.setState({ filmText })
   }
 
-  displayPeople = async () => {
-    const people = await API.fetchPeople()
-    await this.props.storePeople(people)
-    // console.log(storedPeople)
-
-    // this.setState({ people })
+  displayPeople = () => {
+    const url = 'https://swapi.co/api/people'
+    this.props.fetchPeople(url)
   }
 
-  displayPlanets = async () => {
-    const planets = await API.fetchPlanets()
-    this.setState({ planets })
+  displayPlanets = () => {
+    const url = 'https://swapi.co/api/planets'
+    this.props.fetchPlanets(url)
   }
 
-  displayVehicles = async () => {
-    const vehicles = await API.fetchVehicles()
-    this.setState({ vehicles })
-  }
+  // displayVehicles = () => {
+  //   const url = 'https://swapi.co/api/vehicles'
+  //   this.props.fetchVehicles(url)
+   
+  // }
 
   render() {
-    console.log('props', this.props)
     return (
       <div className="App">
         <header>
@@ -55,7 +53,6 @@ class App extends Component {
         </nav>
         <main className='scroll-container'>
           { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
-          {/* { this.state.people !== {} && } */}
         </main>
       </div>
     );
@@ -63,6 +60,7 @@ class App extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  fetchPeople: (url) => dispatch(fetchPeople(url)),
   storePeople: (people) => dispatch(storePeople(people))
 })
 
