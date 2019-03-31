@@ -3,6 +3,8 @@ import '../../main.scss';
 import ScrollingText from '../ScrollingText/ScrollingText'
 import * as API from '../../APIcalls'
 import * as cleaner from '../../cleaner'
+import { storePeople } from '../../actions'
+import { connect } from 'react-redux'
 
 class App extends Component {
   constructor() {
@@ -23,7 +25,10 @@ class App extends Component {
 
   displayPeople = async () => {
     const people = await API.fetchPeople()
-    this.setState({ people })
+    await this.props.storePeople(people)
+    // console.log(storedPeople)
+
+    // this.setState({ people })
   }
 
   displayPlanets = async () => {
@@ -37,6 +42,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('props', this.props)
     return (
       <div className="App">
         <header>
@@ -56,4 +62,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  storePeople: (people) => dispatch(storePeople(people))
+})
+
+export default connect (null, mapDispatchToProps)(App);

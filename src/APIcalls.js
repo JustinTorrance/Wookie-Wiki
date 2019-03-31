@@ -9,9 +9,10 @@ export const fetchText = async () => {
         const film = await response.json()
         return film;
     } catch (error) {
-        console.log(error)
+        console.log(error)    
     } 
 }
+
 
 export const fetchPeople = async () => {
     try {
@@ -24,7 +25,7 @@ export const fetchPeople = async () => {
     }
 }
 
-const fetchNestedPeopleData = (people) => {
+export const fetchNestedPeopleData = (people) => {
     const peopleData = people.map( async person => {
         const speciesData = await (fetchSpecies(person))
         const homeworldData = await(fetchHomeworld(person))
