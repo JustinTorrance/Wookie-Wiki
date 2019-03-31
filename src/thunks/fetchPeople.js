@@ -1,4 +1,4 @@
-import { storePeople } from '../actions'
+import { storePeople } from '../actions/index'
 import { fetchNestedPeopleData } from '../APIcalls'
 
 export const fetchPeople = (url) => {
@@ -6,10 +6,10 @@ export const fetchPeople = (url) => {
     try {
       const response = await fetch(url)
       const data = await response.json()
-      console.log(data)
       const people = await fetchNestedPeopleData(data.results)
-      
       dispatch(storePeople(people))
+    } catch(error) {
+      console.log(error)
     }
   }
 }
