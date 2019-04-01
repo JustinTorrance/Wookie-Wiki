@@ -3,9 +3,9 @@ import '../../main.scss';
 import ScrollingText from '../ScrollingText/ScrollingText'
 import * as API from '../../APIcalls'
 import * as cleaner from '../../cleaner'
-import { storePeople } from '../../actions'
 import { connect } from 'react-redux'
 import { fetchPeople } from '../../thunks/fetchPeople'
+import { storePlanets } from '../../actions'
 
 class App extends Component {
   constructor() {
@@ -29,18 +29,18 @@ class App extends Component {
     this.props.fetchPeople(url)
   }
 
-  displayPlanets = () => {
-    const url = 'https://swapi.co/api/planets'
-    this.props.fetchPlanets(url)
-  }
-
   // displayVehicles = () => {
-  //   const url = 'https://swapi.co/api/vehicles'
-  //   this.props.fetchVehicles(url)
-   
-  // }
+    //   const url = 'https://swapi.co/api/vehicles'
+    //   this.props.fetchVehicles(url)
+    
+    // }
 
-  render() {
+    displayPlanets = async () => {
+      const planets = await API.fetchPlanets()
+      await this.props.storePlanets(planets)
+    }
+    
+    render() {
     return (
       <div className="App">
         <header>
@@ -61,7 +61,8 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPeople: (url) => dispatch(fetchPeople(url)),
-  storePeople: (people) => dispatch(storePeople(people))
+  // fetchVehicles: (url) => dispatch(fetchVehicles(url))
+  storePlanets: (planets) => dispatch(storePlanets(planets))
 })
 
 export default connect (null, mapDispatchToProps)(App);
