@@ -7,16 +7,15 @@ import { connect } from 'react-redux'
 import { fetchPeople } from '../../thunks/fetchPeople'
 import { fetchPlanets } from '../../thunks/fetchPlanets'
 import { fetchVehicles } from '../../thunks/fetchVehicles'
+import { currentCategory } from '../../actions'
+import CardContainer from '../../containers/CardContainer/CardContainer'
 
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      filmText: {},
-      people: {},
-      planets: {},
-      vehicles: {}
+      filmText: {}
     }
   }
 
@@ -26,44 +25,55 @@ class App extends Component {
     this.setState({ filmText })
   }
 
-  displayPeople = () => {
+  displayPeople = (e) => {
+    this.props.currentCategory(e.target.name)
     const url = 'https://swapi.co/api/people'
     this.props.fetchPeople(url)
   }
 
-  displayVehicles = () => {
+  displayVehicles = (e) => {
+    this.props.currentCategory(e.target.name)
     const url = 'https://swapi.co/api/vehicles'
     this.props.fetchVehicles(url)
   }
 
-    displayPlanets = async () => {
+  displayPlanets = (e) => {
+    this.props.currentCategory(e.target.name)
     const url = 'https://swapi.co/api/planets'
     this.props.fetchPlanets(url)
-    }
+  }
     
     render() {
+
     return (
       <div className="App">
         <header>
           <h1>Wookie Wiki</h1>
         </header>
         <nav>
-          <button onClick={() => this.displayPeople()}>People</button>
-          <button onClick={() => this.displayPlanets()}>Planets</button>
-          <button onClick={() => this.displayVehicles()}>Vehicles</button>
+          <button name='people' onClick={(e) => this.displayPeople(e)}>People</button>
+          <button name='planets' onClick={(e) => this.displayPlanets(e)}>Planets</button>
+          <button name='vehicles' onClick={(e) => this.displayVehicles(e)}>Vehicles</button>
         </nav>
         <main className='scroll-container'>
-          { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
+          
+          { !this.props.category ? <ScrollingText {...this.state.filmText} /> : <CardContainer /> }
+        
         </main>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   fetchPeople: (url) => dispatch(fetchPeople(url)),
   fetchVehicles: (url) => dispatch(fetchVehicles(url)),
-  fetchPlanets: (url) => dispatch(fetchPlanets(url))
+  fetchPlanets: (url) => dispatch(fetchPlanets(url)),
+  currentCategory: (category) => dispatch(currentCategory(category))
 })
 
-export default connect (null, mapDispatchToProps)(App);
+export const mapStateToProps = (state) => ({
+  category: state.category
+})
+
+export default connect (mapStateToProps, mapDispatchToProps)(App);
