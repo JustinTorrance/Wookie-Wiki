@@ -12,3 +12,8 @@ export const storeVehicles = (vehicles) => ({
   type: 'STORE_VEHICLES',
   vehicles
 })
+
+export const currentCategory = (category) => ({
+  type: 'CURRENT_CATEGORY',
+  category
+})

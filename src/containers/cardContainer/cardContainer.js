@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Card from '../../components/Card'
 
-const cardContainer = () => {
+const CardContainer = () => {
 
   return(
     <div>
@@ -16,4 +17,4 @@ export const mapStateToProps = (state) => ({
   people: state.people
 })
 
-export default connect (mapStateToProps)(cardContainer)
+export default connect (mapStateToProps)(CardContainer)

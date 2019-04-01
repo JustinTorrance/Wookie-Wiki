@@ -13,10 +13,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      filmText: {},
-      people: {},
-      planets: {},
-      vehicles: {}
+      filmText: {}
     }
   }
 
@@ -26,20 +23,21 @@ class App extends Component {
     this.setState({ filmText })
   }
 
-  displayPeople = () => {
+  displayPeople = (e) => {
     const url = 'https://swapi.co/api/people'
     this.props.fetchPeople(url)
+    this.props.category(e.target.name)
   }
 
-  displayVehicles = () => {
+  displayVehicles = (e) => {
     const url = 'https://swapi.co/api/vehicles'
     this.props.fetchVehicles(url)
   }
 
-    displayPlanets = async () => {
+  displayPlanets = (e) => {
     const url = 'https://swapi.co/api/planets'
     this.props.fetchPlanets(url)
-    }
+  }
     
     render() {
     return (
@@ -48,9 +46,9 @@ class App extends Component {
           <h1>Wookie Wiki</h1>
         </header>
         <nav>
-          <button onClick={() => this.displayPeople()}>People</button>
-          <button onClick={() => this.displayPlanets()}>Planets</button>
-          <button onClick={() => this.displayVehicles()}>Vehicles</button>
+          <button name='people' onClick={(e) => this.displayPeople(e)}>People</button>
+          <button name='planets' onClick={(e) => this.displayPlanets(e)}>Planets</button>
+          <button name='vehicles' onClick={(e) => this.displayVehicles(e)}>Vehicles</button>
         </nav>
         <main className='scroll-container'>
           { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
