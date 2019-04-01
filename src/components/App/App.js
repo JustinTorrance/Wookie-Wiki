@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { fetchPeople } from '../../thunks/fetchPeople'
 import { fetchPlanets } from '../../thunks/fetchPlanets'
 import { fetchVehicles } from '../../thunks/fetchVehicles'
+import { currentCategory } from '../../actions'
 
 
 class App extends Component {
@@ -24,17 +25,19 @@ class App extends Component {
   }
 
   displayPeople = (e) => {
+    this.props.currentCategory(e.target.name)
     const url = 'https://swapi.co/api/people'
     this.props.fetchPeople(url)
-    this.props.category(e.target.name)
   }
 
   displayVehicles = (e) => {
+    this.props.currentCategory(e.target.name)
     const url = 'https://swapi.co/api/vehicles'
     this.props.fetchVehicles(url)
   }
 
   displayPlanets = (e) => {
+    this.props.currentCategory(e.target.name)
     const url = 'https://swapi.co/api/planets'
     this.props.fetchPlanets(url)
   }
@@ -61,7 +64,8 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => ({
   fetchPeople: (url) => dispatch(fetchPeople(url)),
   fetchVehicles: (url) => dispatch(fetchVehicles(url)),
-  fetchPlanets: (url) => dispatch(fetchPlanets(url))
+  fetchPlanets: (url) => dispatch(fetchPlanets(url)),
+  currentCategory: (category) => dispatch(currentCategory(category))
 })
 
 export default connect (null, mapDispatchToProps)(App);
