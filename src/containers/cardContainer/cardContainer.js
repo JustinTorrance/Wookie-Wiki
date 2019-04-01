@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Card from '../../components/Card'
+// import Card from '../../components/Card'
 
 const CardContainer = () => {
 
+  // let displayData = 
+
   return(
     <div>
-
+      HOWDY
     </div>
   )
 }

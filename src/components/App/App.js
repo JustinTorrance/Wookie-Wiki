@@ -8,6 +8,7 @@ import { fetchPeople } from '../../thunks/fetchPeople'
 import { fetchPlanets } from '../../thunks/fetchPlanets'
 import { fetchVehicles } from '../../thunks/fetchVehicles'
 import { currentCategory } from '../../actions'
+import CardContainer from '../../containers/CardContainer/CardContainer'
 
 
 class App extends Component {
@@ -43,6 +44,22 @@ class App extends Component {
   }
     
     render() {
+      
+      // if(!this.props.category) {
+      //   return (<div>
+      //    < ScrollingText {...this.state.filmText} />
+      //   </div>)
+      // } else {
+      //   return (
+      //     <div>
+      //       <CardContainer />
+
+      //   </div> )
+
+      // }
+    
+     
+
     return (
       <div className="App">
         <header>
@@ -54,18 +71,24 @@ class App extends Component {
           <button name='vehicles' onClick={(e) => this.displayVehicles(e)}>Vehicles</button>
         </nav>
         <main className='scroll-container'>
-          { this.state.filmText !== {} && <ScrollingText {...this.state.filmText} /> }
+          
+          { !this.props.category ? <ScrollingText {...this.state.filmText} /> : <CardContainer /> }
+        
         </main>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   fetchPeople: (url) => dispatch(fetchPeople(url)),
   fetchVehicles: (url) => dispatch(fetchVehicles(url)),
   fetchPlanets: (url) => dispatch(fetchPlanets(url)),
   currentCategory: (category) => dispatch(currentCategory(category))
 })
 
-export default connect (null, mapDispatchToProps)(App);
+export const mapStateToProps = (state) => ({
+  category: state.category
+})
+
+export default connect (mapStateToProps, mapDispatchToProps)(App);
