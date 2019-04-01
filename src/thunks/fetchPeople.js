@@ -1,4 +1,4 @@
-import { storePeople } from '../actions/index'
+import { storePeople } from '../actions'
 import { fetchNestedPeopleData } from '../APIcalls'
 
 export const fetchPeople = (url) => {

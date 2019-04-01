@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Card = (props) => {
-
   const mappedProps = Object.keys(props).map(prop => {
     if (prop === 'residents') {
       let residents = props[prop].map(resident => {
