@@ -13,18 +13,6 @@ export const fetchText = async () => {
     } 
 }
 
-
-// export const fetchPeople = async () => {
-//     try {
-//         const response = await fetch('https://swapi.co/api/people')
-//         const peopleData = await response.json()
-//         const people = await fetchNestedPeopleData(peopleData.results)
-//         return Promise.all(people)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
 export const fetchNestedPeopleData = (people) => {
     const peopleData = people.map( async person => {
         const speciesData = await (fetchSpecies(person))

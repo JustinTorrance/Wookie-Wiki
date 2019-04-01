@@ -5,6 +5,7 @@ import * as API from '../../APIcalls'
 import * as cleaner from '../../cleaner'
 import { connect } from 'react-redux'
 import { fetchPeople } from '../../thunks/fetchPeople'
+import { fetchVehicles } from '../../thunks/fetchVehicles'
 import { storePlanets } from '../../actions'
 
 class App extends Component {
@@ -29,11 +30,10 @@ class App extends Component {
     this.props.fetchPeople(url)
   }
 
-  // displayVehicles = () => {
-    //   const url = 'https://swapi.co/api/vehicles'
-    //   this.props.fetchVehicles(url)
-    
-    // }
+  displayVehicles = () => {
+    const url = 'https://swapi.co/api/vehicles'
+    this.props.fetchVehicles(url)
+  }
 
     displayPlanets = async () => {
       const planets = await API.fetchPlanets()
@@ -61,7 +61,7 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPeople: (url) => dispatch(fetchPeople(url)),
-  // fetchVehicles: (url) => dispatch(fetchVehicles(url))
+  fetchVehicles: (url) => dispatch(fetchVehicles(url)),
   storePlanets: (planets) => dispatch(storePlanets(planets))
 })
 
