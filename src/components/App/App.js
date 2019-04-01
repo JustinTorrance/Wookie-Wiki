@@ -11,7 +11,6 @@ import { currentCategory } from '../../actions'
 import CardContainer from '../../containers/CardContainer/CardContainer'
 import { Link, Route } from 'react-router-dom'
 
-
 class App extends Component {
   constructor() {
     super()
@@ -44,7 +43,7 @@ class App extends Component {
     this.props.fetchPlanets(url)
   }
     
-    render() {
+  render() {
 
     return (
       <div className="App">

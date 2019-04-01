@@ -18,8 +18,7 @@ class CardContainer extends Component {
       </div>
       )
   }
-  
-  }
+}
   
   export const mapStateToProps = (state) => ({
     planets: state.planets,
