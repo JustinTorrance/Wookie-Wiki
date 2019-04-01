@@ -1,11 +1,23 @@
 import React from 'react'
 
-const Card = ({name}) => {
+const Card = (props) => {
+
+  const mappedProps = Object.keys(props).map(prop => {
+    if (prop === 'residents') {
+      let residents = props[prop].map(resident => {
+        return resident
+      })
+      return <div><h4>{prop}:</h4> <p>{residents}</p></div>        
+    } else {
+      return <div><h4>{prop}:</h4> <p>{props[prop]}</p></div>
+    }
+  })
 
   return (
-    <div>
-      <p>{name}</p>
-    </div>
+    <article>
+      <h3>{props.name}</h3>
+      {mappedProps}
+    </article>
   )
 }
 

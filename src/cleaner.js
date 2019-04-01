@@ -21,8 +21,8 @@ export const cleanVehicles = (vehicleData) => {
 }
 
 export const cleanPlanets = (planets) => {
-    const planetData = planets.map(planet => {
-        const residents = fetchResidents(planet.residents)
+    const planetData = planets.map(async planet => {
+        const residents = await fetchResidents(planet.residents)
         return {
             name: planet.name,
             terrain: planet.terrain,
