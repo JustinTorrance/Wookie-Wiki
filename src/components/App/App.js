@@ -44,21 +44,6 @@ class App extends Component {
   }
     
     render() {
-      
-      // if(!this.props.category) {
-      //   return (<div>
-      //    < ScrollingText {...this.state.filmText} />
-      //   </div>)
-      // } else {
-      //   return (
-      //     <div>
-      //       <CardContainer />
-
-      //   </div> )
-
-      // }
-    
-     
 
     return (
       <div className="App">
