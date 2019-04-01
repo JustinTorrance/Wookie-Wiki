@@ -5,8 +5,9 @@ import * as API from '../../APIcalls'
 import * as cleaner from '../../cleaner'
 import { connect } from 'react-redux'
 import { fetchPeople } from '../../thunks/fetchPeople'
+import { fetchPlanets } from '../../thunks/fetchPlanets'
 import { fetchVehicles } from '../../thunks/fetchVehicles'
-import { storePlanets } from '../../actions'
+
 
 class App extends Component {
   constructor() {
@@ -36,8 +37,8 @@ class App extends Component {
   }
 
     displayPlanets = async () => {
-      const planets = await API.fetchPlanets()
-      await this.props.storePlanets(planets)
+    const url = 'https://swapi.co/api/planets'
+    this.props.fetchPlanets(url)
     }
     
     render() {
@@ -62,7 +63,7 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => ({
   fetchPeople: (url) => dispatch(fetchPeople(url)),
   fetchVehicles: (url) => dispatch(fetchVehicles(url)),
-  storePlanets: (planets) => dispatch(storePlanets(planets))
+  fetchPlanets: (url) => dispatch(fetchPlanets(url))
 })
 
 export default connect (null, mapDispatchToProps)(App);
