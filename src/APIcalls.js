@@ -13,18 +13,6 @@ export const fetchText = async () => {
     } 
 }
 
-
-// export const fetchPeople = async () => {
-//     try {
-//         const response = await fetch('https://swapi.co/api/people')
-//         const peopleData = await response.json()
-//         const people = await fetchNestedPeopleData(peopleData.results)
-//         return Promise.all(people)
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
 export const fetchNestedPeopleData = (people) => {
     const peopleData = people.map( async person => {
         const speciesData = await (fetchSpecies(person))
@@ -52,23 +40,23 @@ const fetchSpecies = async (person) => {
     return { species: species.name }
     }
 
-export const fetchPlanets = async () => {
-    const response = await fetch('https://swapi.co/api/planets')
-    const planets = await response.json()
-    const planetData = planets.results.map( async planet => {
-        const residents = await fetchResidents(planet.residents)
-        return {
-            name: planet.name,
-            terrain: planet.terrain,
-            population: planet.population,
-            climate: planet.climate,
-            residents: residents
-        }
-    })
-    return Promise.all(planetData)
-}
+// export const fetchPlanets = async () => {
+//     const response = await fetch('https://swapi.co/api/planets')
+//     const planets = await response.json()
+//     const planetData = planets.results.map( async planet => {
+//         const residents = await fetchResidents(planet.residents)
+//         return {
+//             name: planet.name,
+//             terrain: planet.terrain,
+//             population: planet.population,
+//             climate: planet.climate,
+//             residents: residents
+//         }
+//     })
+//     return Promise.all(planetData)
+// }
 
-const fetchResidents = (residents) => {
+export const fetchResidents = (residents) => {
     const residentsArray = residents.map( async resident => {
         const response = await fetch(resident)
         const residentData = await response.json()
