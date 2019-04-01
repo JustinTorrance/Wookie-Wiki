@@ -9,6 +9,7 @@ import { fetchPlanets } from '../../thunks/fetchPlanets'
 import { fetchVehicles } from '../../thunks/fetchVehicles'
 import { currentCategory } from '../../actions'
 import CardContainer from '../../containers/CardContainer/CardContainer'
+import { Link, Route } from 'react-router-dom'
 
 
 class App extends Component {
@@ -51,14 +52,16 @@ class App extends Component {
           <h1>Wookie Wiki</h1>
         </header>
         <nav>
-          <button name='people' onClick={(e) => this.displayPeople(e)}>People</button>
-          <button name='planets' onClick={(e) => this.displayPlanets(e)}>Planets</button>
-          <button name='vehicles' onClick={(e) => this.displayVehicles(e)}>Vehicles</button>
+          <Link to='/people'><button name='people' onClick={(e) => this.displayPeople(e)}>People</button></Link>
+          <Link to='/planets'><button name='planets' onClick={(e) => this.displayPlanets(e)}>Planets</button></Link>
+          <Link to='/vehicles'><button name='vehicles' onClick={(e) => this.displayVehicles(e)}>Vehicles</button></Link>
         </nav>
-        <main className='scroll-container'>
-          
+        <main className='scroll-container'> 
           { !this.props.category ? <ScrollingText {...this.state.filmText} /> : <CardContainer /> }
-        
+          <Route exact path='/' component={App} />
+          <Route exact path='/planets' component={CardContainer} />
+          <Route exact path='/vehicles' component={CardContainer} />
+          <Route exact path='/people' component={CardContainer} />
         </main>
       </div>
     );
